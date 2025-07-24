@@ -15,12 +15,15 @@ public class Lancamentos {
 
     private Double valor;
 
+    private Integer categoriaId;
+
     @Column(name = "dataHora", columnDefinition = "DATETIME")
     private LocalDateTime dataHora;
 
     public Lancamentos(LancamentoRequestDTO data) {
         this.descricao = data.descricao();
         this.valor = data.valor();
+        this.categoriaId = data.categoriaId();
     }
 
     // método para definir a hora e torna-la persistente
@@ -69,5 +72,13 @@ public class Lancamentos {
 
     public void setDataHora(LocalDateTime dataHora) {
         this.dataHora = dataHora;
+    }
+
+    public Integer getCategoriaId() {
+        return categoriaId;
+    }
+
+    public void setCategoriaId(Integer categoriaId) {
+        this.categoriaId = categoriaId;
     }
 }

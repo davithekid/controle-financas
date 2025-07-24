@@ -4,6 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 public record LancamentoRequestDTO(@NotBlank String descricao,
-                                   @NotNull Double valor) {
+                                   @NotNull Double valor,
+                                   @NotNull Integer categoriaId
+) {
 
 }
