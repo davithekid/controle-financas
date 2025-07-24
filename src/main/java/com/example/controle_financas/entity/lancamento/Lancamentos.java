@@ -1,10 +1,7 @@
 package com.example.controle_financas.entity.lancamento;
 
-
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Table(name = "lancamentos")
 @Entity(name = "lancamentos")
@@ -16,12 +13,15 @@ public class Lancamentos {
 
     private String descricao;
 
-    private UUID user_id;
-
     private Double valor;
 
     @Column(name = "dataHora", columnDefinition = "DATETIME")
     private LocalDateTime dataHora;
+
+    public Lancamentos(LancamentoRequestDTO data) {
+        this.descricao = data.descricao();
+        this.valor = data.valor();
+    }
 
     // método para definir a hora e torna-la persistente
     @PrePersist
@@ -32,12 +32,11 @@ public class Lancamentos {
     public Lancamentos() {
     }
 
-    public Lancamentos(Integer id, String descricao, LocalDateTime dataHora, Double valor, UUID user_id) {
+    public Lancamentos(Integer id, String descricao, LocalDateTime dataHora, Double valor) {
         this.id = id;
         this.descricao = descricao;
         this.dataHora = dataHora;
         this.valor = valor;
-        this.user_id = user_id;
     }
 
     public Integer getId() {
@@ -54,14 +53,6 @@ public class Lancamentos {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public UUID getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(UUID user_id) {
-        this.user_id = user_id;
     }
 
     public Double getValor() {

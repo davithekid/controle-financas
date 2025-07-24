@@ -31,6 +31,8 @@
                             .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
                             .requestMatchers(HttpMethod.GET, "/lancamentos").hasRole("ADMIN")
                             .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.POST, "/lancamentos").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.PUT, "/lancamentos").hasRole("ADMIN")
                             .anyRequest().authenticated()
                     )
                     .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

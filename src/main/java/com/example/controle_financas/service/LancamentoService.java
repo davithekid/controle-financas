@@ -1,11 +1,19 @@
 package com.example.controle_financas.service;
 
-import com.example.controle_financas.entity.lancamento.LancamentoDTO;
+import com.example.controle_financas.entity.lancamento.LancamentoRequestDTO;
+import com.example.controle_financas.entity.lancamento.LancamentoResponseDTO;
+import com.example.controle_financas.entity.lancamento.LancamentoUpdateDTO;
+import com.example.controle_financas.entity.lancamento.Lancamentos;
 import com.example.controle_financas.repository.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class LancamentoService {
@@ -18,11 +26,39 @@ public class LancamentoService {
     }
 
     // GET
-    public List<LancamentoDTO> getAllLancamentos() {
+    public List<LancamentoResponseDTO> getAllLancamentos() {
         return repository.findAll()
                 .stream()
-                .map(LancamentoDTO::new)
+                .map(LancamentoResponseDTO::new)
                 .toList();
+    }
+
+    // POST
+    public LancamentoResponseDTO postDTO(LancamentoRequestDTO data){
+        Lancamentos entity = new Lancamentos(data);
+        repository.save(entity);
+        return new LancamentoResponseDTO(entity);
+    }
+
+    // PUT
+    public void update(Integer id, LancamentoUpdateDTO updateDTO){
+
+        if(!repository.existsById(id)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lançamento não encontrado");
+        }
+
+        var lancamentoEntity = repository.findById(id);
+        var entity = lancamentoEntity.get();
+
+        if(updateDTO.descricao() != null){
+            entity.setDescricao(updateDTO.descricao());
+        }
+
+        if(updateDTO.valor() != null){
+            entity.setValor(updateDTO.valor());
+        }
+        repository.save(entity);
+
     }
 
 }
