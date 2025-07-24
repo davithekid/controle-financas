@@ -8,12 +8,9 @@ import com.example.controle_financas.repository.LancamentoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
-
 import java.util.List;
-import java.util.UUID;
+
 
 @Service
 public class LancamentoService {
@@ -58,6 +55,14 @@ public class LancamentoService {
             entity.setValor(updateDTO.valor());
         }
         repository.save(entity);
+    }
+
+    // delete
+    public void delete(Integer id){
+        if(!repository.existsById(id)){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Lançamento não encontrado");
+        }
+        repository.deleteById(id);
 
     }
 

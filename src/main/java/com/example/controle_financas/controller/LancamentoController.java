@@ -39,4 +39,10 @@ public class LancamentoController {
         return ResponseEntity.noContent().build();
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable("id") Integer id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }

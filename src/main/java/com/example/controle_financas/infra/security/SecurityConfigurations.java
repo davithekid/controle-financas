@@ -33,6 +33,7 @@
                             .requestMatchers(HttpMethod.POST, "/users").hasRole("ADMIN")
                             .requestMatchers(HttpMethod.POST, "/lancamentos").hasRole("ADMIN")
                             .requestMatchers(HttpMethod.PUT, "/lancamentos").hasRole("ADMIN")
+                            .requestMatchers(HttpMethod.DELETE, "/lancamentos").hasRole("ADMIN")
                             .anyRequest().authenticated()
                     )
                     .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
