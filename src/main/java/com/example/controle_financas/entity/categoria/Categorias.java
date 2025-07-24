@@ -21,6 +21,10 @@ public class Categorias {
         this.nome = nome;
     }
 
+    public Categorias(CategoriasRequestDTO data) {
+        this.nome = data.nome();
+    }
+
     public Integer getId() {
         return id;
     }

@@ -1,11 +1,11 @@
 package com.example.controle_financas.controller;
 
+import com.example.controle_financas.entity.categoria.CategoriasRequestDTO;
 import com.example.controle_financas.entity.categoria.CategoriasResponseDTO;
 import com.example.controle_financas.service.CategoriasService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,6 +23,12 @@ public class CategoriasController {
     @GetMapping
     public List<CategoriasResponseDTO> getAll(){
         return service.getAllCategorias();
+    }
+
+    @PostMapping
+    public ResponseEntity<CategoriasResponseDTO> criar(@RequestBody CategoriasRequestDTO data){
+        CategoriasResponseDTO response = service.postDTO(data);
+        return ResponseEntity.ok(response);
     }
 
 
