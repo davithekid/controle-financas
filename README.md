@@ -38,9 +38,10 @@ API RESTful desenvolvida com Java e Spring Boot para controle financeiro pessoal
 | POST   | `/auth/login`    | Login e geração de token |
 
 ### 👤 Usuário
-| Método | Rota          | Descrição       |
-|--------|---------------|-----------------|
-| GET    | `/usuarios/me` | Dados do usuário logado |
+| Método | Rota     | Descrição                 |
+|--------|----------|---------------------------|
+| GET    | `/users` | Dados de usuários logados |
+| GET    | `/users/me` | Dados do usuário logado   |
 
 ### 💸 Lançamentos
 | Método | Rota               | Descrição              |
